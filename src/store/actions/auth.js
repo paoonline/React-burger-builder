@@ -30,13 +30,9 @@ export const auth = (email, password, isSignup) => {
             password: password,
             returnSecureToken: true
         }
-        let url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyA5whTtFnZ6TMwWYPkEu8mx-tVtyocF8yE'
-        
-        if(!isSignup){
-            url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyA5whTtFnZ6TMwWYPkEu8mx-tVtyocF8yE'
-        }
+       
 
-        axios.post(url, authData)
+        axios.post(null, authData)
             .then(res => {
                 console.log(res)
                 dispatch(authSuccess(res.data.idToken, res.data.localId))
