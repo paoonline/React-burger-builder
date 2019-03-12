@@ -22,6 +22,11 @@ describe('<NavigationItems />', () => {
         expect(wrapper.find(NavigationItem)).toHaveLength(3)
     })
 
+    it('should an exact Orders button', () => {
+        wrapper.setProps({isAuthenticated: true})
+        expect(wrapper.contains(<NavigationItem link="/orders">Orders</NavigationItem>)).toEqual(true)
+    })
+
     it('should an exact logout button', () => {
         wrapper.setProps({isAuthenticated: true})
         expect(wrapper.contains(<NavigationItem link="/logout">Logout</NavigationItem>)).toEqual(true)

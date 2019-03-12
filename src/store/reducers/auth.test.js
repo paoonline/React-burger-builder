@@ -31,4 +31,19 @@ describe('auth reducer', () => {
             authRedirectPath: '/'
         })
     })
+
+    it('should store the token upon login faild', () => {
+        expect(reducer({
+            error: null,
+            loading: false,
+            authRedirectPath: '/'
+        },{
+            type: actionTypes.AUTH_FAIL,
+            error: 'some-error'
+        })).toEqual({
+            error: 'some-error',
+            loading: false,
+            authRedirectPath: '/'
+        })
+    })
 })
