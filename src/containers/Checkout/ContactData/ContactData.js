@@ -14,6 +14,7 @@ import * as actions from '../../../store/actions/index'
 import {updateObject, checkValidity} from '../../../shared/utility'
 
 class ContactData extends Component {
+    // form object
     state = {
         orderForm:{  
             name: {
@@ -103,7 +104,9 @@ class ContactData extends Component {
         },
         formIsValid:false,
     }
+    //
 
+    // Order Submit
     orderHandler = (e) => {
         e.preventDefault()
         const formData = {};
@@ -119,28 +122,9 @@ class ContactData extends Component {
 
         this.props.onOrderBurger(order, this.props.token)
     }
+    //
 
-    // checkValidity(value, rules){
-    //     let isValid = true;
-    //     if(!rules){
-    //         return true;
-    //     }
-
-    //     if(rules.required){
-    //         isValid = value.trim() !== ''  && isValid
-    //     }
-
-    //     if(rules.minLength){
-    //         isValid = value.length >= rules.minLength && isValid
-    //     }
-
-    //     if(rules.maxLength){
-    //         isValid = value.length <= rules.maxLength && isValid
-    //     }
-
-    //     return isValid
-    // }
-
+     // vaildInput
     inputChangedHandler = (e, inputIdentifier) => {
        
         const updatedFormElement =  updateObject(this.state.orderForm[inputIdentifier], {
@@ -160,8 +144,10 @@ class ContactData extends Component {
 
         this.setState({orderForm: updatedOrderForm, formIsValid:formIsValid})
     }
+    //
 
     render () {
+        // prepare array to Form send to db
         const formElementsArray = []
         for(let key in this.state.orderForm){
             formElementsArray.push({
@@ -169,6 +155,7 @@ class ContactData extends Component {
                 config: this.state.orderForm[key]
             })
         }
+        
         let form = (             
             <form onSubmit={this.orderHandler}>
 
@@ -187,6 +174,9 @@ class ContactData extends Component {
                 <Button btnType="Success" disabled={!this.state.formIsValid}>Order</Button>
             </form>
         );
+        //
+
+        // get props loading
         if(this.props.loading){
             form = <Spinner />
         }
@@ -196,6 +186,7 @@ class ContactData extends Component {
                 {form}
             </div>
         )
+        //
     }
 }
 
@@ -211,7 +202,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        onOrderBurger : (OrderData, token) => dispatch(actions.purchaseBurger(OrderData, token))
+        onOrderBurger : (OrderData, token) => dispatch(actions.purchaseBurger(OrderData, token)) // submitOrder
     }
    
 }

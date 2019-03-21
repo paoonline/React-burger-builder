@@ -4,13 +4,16 @@ import Backdrop from '../Backdrop/Backdrop'
 
 class Modal extends Component{
 
+    // get props check on/off
     shouldComponentUpdate(nextProps, nextState){
         return nextProps.show === this.props.show || nextProps.children !== this.props.children
     }
+    //
 
     render(){
+        // render Modal from props
         return(
-            <React.Fragment>
+        <React.Fragment>
             <Backdrop show={this.props.show} clicked={this.props.modalClosed}/>
             <div className={classes.Modal}
                 style={{
@@ -22,6 +25,7 @@ class Modal extends Component{
             </div>
         </React.Fragment>
         )
+        //
     }
 }
 

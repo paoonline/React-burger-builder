@@ -1,12 +1,14 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
 
+// return new state before login success
 export const authStart = () => {
     return{
         type: actionTypes.AUTH_START
     }
 }
 
+// return new state after login success 
 export const authSuccess = (token, userId) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
@@ -15,6 +17,7 @@ export const authSuccess = (token, userId) => {
     }
 }
 
+// return new state authen fail
 export const authFail = (error) => {
     return {
         type: actionTypes.AUTH_FAIL,
@@ -22,6 +25,7 @@ export const authFail = (error) => {
     }
 }
 
+// return new state remove localStorage for logout
 export const logout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('expirationDate')
@@ -31,6 +35,7 @@ export const logout = () => {
     }
 }
 
+// check cookie expire then return new state
 export const checkAuthTimeout = (expire) => {
     return dispatch => {
         setTimeout(() => {
@@ -39,6 +44,7 @@ export const checkAuthTimeout = (expire) => {
     }
 }
 
+// when click authen then return new state
 export const auth = (email, password, isSignup) => {
     return dispatch => {
         dispatch(authStart())
@@ -63,14 +69,13 @@ export const auth = (email, password, isSignup) => {
                 dispatch(authSuccess(res.data.idToken, res.data.localId))
                 dispatch(checkAuthTimeout(res.data.expiresIn))
             })
-            .catch(err => {
-            
+            .catch(err => {       
                 dispatch(authFail(err.response.data.error))
             })
-
     }
 }
 
+// when authen return new state redirect to '/'
 export const setAuthRedirectPath = (path) => {
     return {
         type: actionTypes.SET_AUTH_REDIRECT_PATH,
@@ -78,6 +83,7 @@ export const setAuthRedirectPath = (path) => {
     }
 }
 
+// check token when refresh page then return new token
 export const authCheckState = () => {
     return dispatch => {
         const token = localStorage.getItem('token')
@@ -87,8 +93,10 @@ export const authCheckState = () => {
             const expirationDate = new Date(localStorage.getItem('expirationDate'))
 
             if(expirationDate <= new Date()){
+                // if expirationDate <= new Date() then dispatch(logout())
                 dispatch(logout())
             }else{
+                // if expirationDate > new Date() then return new token expire
                 const userId = localStorage.getItem('userId')
                 dispatch(authSuccess(token, userId))
                 dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000))

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 
 const asyncComponent = (importComponent) => {
+    //lazy loading
     return class extends Component {
         state = {
             component : null

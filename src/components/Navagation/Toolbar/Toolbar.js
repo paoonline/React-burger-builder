@@ -4,10 +4,13 @@ import Logo from '../../Logo/Logo'
 import NavigationItems from '../NavigationItems/NavigationItems'
 import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle'
 
+// return drawer ui from props
 const toolbar = (props) => (
    <header className={classes.Toolbar}>
 
+        {/* send props to closed/open modal */}
         <DrawerToggle clicked={props.drawerToggleCliked}/>
+        {/* */}
         <div className={classes.Logo}>
             <Logo/>
         </div>
@@ -16,5 +19,6 @@ const toolbar = (props) => (
         </nav>
    </header>
 );
+//
 
 export default toolbar

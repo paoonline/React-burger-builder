@@ -15,6 +15,8 @@ const INGREDIENT_PRICES = {
     bacon: 0.7
 };
 
+
+// add ings then return new state
 const addIngredient = (state, action) => {
     const updatedIngredient = {[action.ingredientName]: state.ingredients[action.ingredientName] + 1}
     const updatedIngredients = updateObject(state.ingredients, updatedIngredient)
@@ -26,6 +28,7 @@ const addIngredient = (state, action) => {
     return updateObject(state, updatedState)
 }
 
+// remove ings then return new state
 const removeIngredient = (state, action) => {
     const updatedIng = {[action.ingredientName]: state.ingredients[action.ingredientName] - 1}
     const updatedIngs = updateObject(state.ingredients, updatedIng)
@@ -37,6 +40,7 @@ const removeIngredient = (state, action) => {
     return updateObject(state, updatedSt)
 }
 
+// set default ings then return new state
 const setIngredient = (state, action) => {
     return updateObject(state, {
         ingredients:{
@@ -51,10 +55,12 @@ const setIngredient = (state, action) => {
     })
 }
 
+// set throw error from api then return new state
 const fetchIngredientsFailed = (state, action) => {
     updateObject(state, {error:true})
 }
 
+// return reducer from variable
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case actionTypes.ADD_INGREDIENT:

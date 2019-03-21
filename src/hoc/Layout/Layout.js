@@ -9,19 +9,27 @@ class Layout extends Component {
         showSideDrawer: false
     }
 
+    // Closed drawer
     sideDrawerClosedHandler = () => {
+        console.log(false)
         this.setState({showSideDrawer:false})
     }
+    //
 
+    // Open drawer
     sideDrawerToggleHandler = () => {
+      
         this.setState((prevState)=>{
+            console.log(!prevState.showSideDrawer)
             return {showSideDrawer:!prevState.showSideDrawer}
         })
     }
+    //
 
     render(){
         return(
             <React.Fragment>
+            {/* send props to closed/open modal */}
             <Toolbar
                 isAuth={this.props.isAuthenticated}
                 drawerToggleCliked={this.sideDrawerToggleHandler}/>
@@ -32,6 +40,7 @@ class Layout extends Component {
             <main className={classes.Content}>
                 {this.props.children}
             </main>
+            {/* */}
         </React.Fragment>
         )
     }
@@ -39,7 +48,7 @@ class Layout extends Component {
 
 const mapStateToProps = state => {
     return{
-        isAuthenticated : state.auth.token !== null
+        isAuthenticated : state.auth.token !== null // render menu from auth
     }
 }
 export default connect(mapStateToProps)(Layout)

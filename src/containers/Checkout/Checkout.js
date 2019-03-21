@@ -3,7 +3,6 @@ import {Route, Redirect} from 'react-router-dom'
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary'
 import { connect } from 'react-redux'
 import ContactData from './ContactData/ContactData'
-import * as actions from '../../store/actions/index'
 
 class Checkout extends Component {
 
@@ -12,30 +11,41 @@ class Checkout extends Component {
     // }
 
     checkoutCancelledHandler = () => {
-        this.props.history.goBack()
+        // go back history
+            this.props.history.goBack()
+        //
     }
 
     checkoutContinuedHandler = () => {
-        this.props.history.replace('/checkout/contact-data') 
+        // go to history
+            this.props.history.replace('/checkout/contact-data')
+        //
     }
     render(){
         let summary = <Redirect to="/"/>
+
+        // check props ings
         if(this.props.ings){
+            // check props purchased afther fetch data from purchaseBurgerSuccess
             const purchasedRedirect = this.props.purchased ? <Redirect to="/"/> : null;
             summary = (
                 <div>
                     {purchasedRedirect}
+                    {/* send Props and render CheckoutSummary */}
                     <CheckoutSummary 
                         ingredients={this.props.ings}
                         checkoutCancelled={this.checkoutCancelledHandler}
                         checkoutContinued={this.checkoutContinuedHandler} 
                     />
+                    {/* */}
                     <Route 
                         path= {this.props.match.path + '/contact-data'} 
                         component={ContactData}/>
                 </div>
             )
+            //
         }
+        //
         return summary
         
     }
@@ -43,10 +53,8 @@ class Checkout extends Component {
 
 const mapStateToProps = state => {
     return {
-        ings: state.burgerBuilder.ingredients,
-        purchased: state.order.purchased
+        ings: state.burgerBuilder.ingredients, //get ings
+        purchased: state.order.purchased // get purchased
     }
 }
-
-// 
 export default connect(mapStateToProps)(Checkout)

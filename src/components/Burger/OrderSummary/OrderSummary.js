@@ -3,10 +3,9 @@ import React,{Component} from 'react'
 import Button from '../../UI/Button/Button'
 
 class OrderSummary extends Component {
-    
-
 
     render(){
+        // return ings list logic
         const ingredientSummary = Object.keys(this.props.ingredients)
         .map(igKey => {
             return (
@@ -15,6 +14,7 @@ class OrderSummary extends Component {
                 </li>
                 )
         })
+        //
 
         return(
             <React.Fragment>

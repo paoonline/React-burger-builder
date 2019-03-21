@@ -7,14 +7,17 @@ const initialState = {
     purchased: false
 } 
 
+// when click continue order set purchased: false for access checkout page
 const purchaseInit = (state, action) => {
-    return updateObject(state, { purchased: false})
+    return updateObject(state, { purchased: true})
 }
 
+// set before send data loading true
 const purchaseBurgerStart = (state, action) => {
     return updateObject(state, { loading:true})
 }
 
+// when send data success
 const purchaseBurgerSuccess = (state, action) => {
     const newOrder = updateObject(action.orderData, {id: action.orderId})
     return updateObject(state, { 
@@ -23,22 +26,28 @@ const purchaseBurgerSuccess = (state, action) => {
         orders:state.orders.concat(newOrder)})
 }
 
+// when send data fail
 const purchaseBurgerFailed = (state, action) => {
     return updateObject(state, { loading:false})
 }
 
+// before fetch data set loading true
 const fetch_orders_start = (state, action) => {
     return updateObject(state, { loading:true})
 }
 
+// when fetch order success then set loading false and orders from db
 const fetch_orders_success = (state, action) => {
     return  updateObject(state, {orders: action.orders, loading:false})
 }
 
+// when fetch order fail then set loading false and orders error after that 
+// hoc be show modal error
 const fetch_orders_fail = (state, action) => {
     return updateObject(state, { loading:false})
 }
 
+// return reducer from variable
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.PURCHASE_INIT:

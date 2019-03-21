@@ -11,6 +11,7 @@ import Logout from './containers/Auth/Logout/Logout'
 
 import * as actions from './store/actions/index'
 
+// lazy loading
 const asyncCheckout = asyncComponet(() => {
     return import('./containers/Checkout/Checkout')
 })
@@ -22,13 +23,18 @@ const asyncOrders= asyncComponet(() => {
 const asyncAuth = asyncComponet(() => {
   return import('./containers/Auth/Auth')
 })
+//
 
 class App extends Component {
+  // check authen for show menu
   componentDidMount(){
     this.props.onTryAutoSignup()
   }
+  //
 
   render() {
+
+    // show menu from props.isAuthenticated)
     let routes = (
       <Switch>
         <Route path="/auth" component={asyncAuth} />
@@ -50,11 +56,15 @@ class App extends Component {
         
       )
     }
+    //
+
     return (
       <div>
+          {/* render layout menu */}
           <Layout>
             {routes}
           </Layout>
+          {/*  */}
       </div>
     );
   }
@@ -62,7 +72,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated : state.auth.token !== null
+    isAuthenticated : state.auth.token !== null // token from authen
   }
 }
 

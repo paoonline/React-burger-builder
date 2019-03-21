@@ -1,10 +1,14 @@
+//spread objecy
 export const updateObject = (oldObject, updateProperties) => {
     return {
         ...oldObject,
         ...updateProperties
     }
 }
+//
 
+
+// Check Vailidate//
 export const checkValidity = (value, rules) => {
     let isValid = true;
     if(!rules){
@@ -25,3 +29,4 @@ export const checkValidity = (value, rules) => {
 
     return isValid
 }
+//

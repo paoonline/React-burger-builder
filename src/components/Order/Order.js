@@ -5,14 +5,17 @@ const order = (props) => {
     const ingredients = []
 
     for (let ingredientName in props.ingredients){
+        // set Props ingredients from Orders
         ingredients.push(
-                {
-                    name: ingredientName, 
-                    amount:props.ingredients[ingredientName]
-                }
-                )
+        {
+            name: ingredientName, 
+            amount:props.ingredients[ingredientName]
+        }
+        //
+        )
     }
 
+    // map new Style
     const ingredientOutput = ingredients.map(ig => {
         return <span 
             style={{
@@ -24,6 +27,7 @@ const order = (props) => {
             key={ig.name}>{ig.name} ({ig.amount})
             </span>
     })
+    //
 
     return (
         <div className={classes.Order}>

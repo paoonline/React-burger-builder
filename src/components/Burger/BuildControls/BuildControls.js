@@ -2,13 +2,16 @@ import React from 'react'
 import classes from './BuildControls.css'
 import BuildControl from './BuildControl/BuildControl';
 
+// initial Structure to create ingredients
 const controls = [
     {label: 'Salad', type: 'salad'},
     {label: 'Bacon', type: 'bacon'},
     {label: 'Cheese', type: 'cheese'},
     {label: 'Meat', type: 'meat'}
 ]
+//
 
+// render Curennt price and ings from props and check props Auth
 const buildControls = (props) => (
     <div className={classes.BuildControls}>
         <p>Current Price: <strong>{props.price.toFixed(2)}</strong></p>
@@ -30,5 +33,6 @@ const buildControls = (props) => (
             
     </div>
 )
+//
 
 export default buildControls

@@ -12,18 +12,22 @@ import burgerBuilderReducer from './store/reducers/burgerBuilder';
 import orderReducer from './store/reducers/order'
 import authReducer from './store/reducers/auth'
 
+// redux devtool
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__  : null || compose;
 
+// combine reducer
 const rootReducer = combineReducers({
     burgerBuilder: burgerBuilderReducer,
     order:orderReducer,
     auth: authReducer
 })
 
+// create function to store
 const store = createStore(rootReducer, composeEnhancers(
     applyMiddleware(thunk)
 ));
 
+//provider store and wrap BrowserRouter to App because app have redirect url
 const app = (
     <Provider store={store}>
         <BrowserRouter>

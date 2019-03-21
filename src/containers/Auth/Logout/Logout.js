@@ -6,7 +6,9 @@ import * as actions from '../../../store/actions/index'
 class Logout extends Component{
 
     componentDidMount () {
+        // remove Token, UserId
         this.props.onLogout()
+        //
     }
 
     render(){
@@ -16,7 +18,7 @@ class Logout extends Component{
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogout: () => dispatch(actions.logout())
+        onLogout: () => dispatch(actions.logout()) // remove Token, UserId
     }
 }
 

@@ -9,12 +9,17 @@ import Spinner from '../../components/UI/Spinner/Spinner'
 class Orders extends Component {
 
     componentDidMount(){
+        // authen for access to Orders page
         this.props.onFetchOrders(this.props.token, this.props.userId)
+        //
     }
 
     render() {
         let orders = <Spinner />
+
+        // Check loadingState to false
         if(!this.props.loading){
+            // send props to Order
             orders =  this.props.orders.map(order => (
                 <Order 
                     key={order.id}
@@ -22,29 +27,29 @@ class Orders extends Component {
                     price={order.price}
                 />
                 )
-            )    
+            )
         }
+        //
         return (
             <div>
                 {orders}
             </div>
         )
     }
-  
 }
 
 const mapStateToProps = state => {
     return{
-        orders: state.order.orders,
-        loading: state.order.loading,
-        token: state.auth.token,
-        userId: state.auth.userId
+        orders: state.order.orders, // order props
+        loading: state.order.loading, // loading props
+        token: state.auth.token, // for authen
+        userId: state.auth.userId // for authen
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return{
-        onFetchOrders: (token, userId) => dispatch(actions.fetchOrders(token, userId))
+        onFetchOrders: (token, userId) => dispatch(actions.fetchOrders(token, userId)) //get Token
     }
 }
 

@@ -1,6 +1,21 @@
 import * as actionTypes from './actionTypes'
 import axios from '../../axios-orders'
 
+// when click continue order set purchased: false for access checkout page
+export const purchaseInit = () => {
+    return {
+        type:actionTypes.PURCHASE_INIT
+    }
+}
+
+// set before send data loading true
+export const purchaseBurgerStart = () => {
+    return {
+        type: actionTypes.PURCHASE_BURGER_START
+    }
+}
+
+// when send data success
 export const purchaseBurgerSuccess = (id, orderData) => {
     return {
         type: actionTypes.PURCHASE_BURGER_SUCCESS,
@@ -9,6 +24,7 @@ export const purchaseBurgerSuccess = (id, orderData) => {
     }
 }
 
+// when send data fail
 export const purchaseBurgerFail = (error) => {
     return {
         type: actionTypes.PURCHASE_BURGER_FAIL,
@@ -16,12 +32,7 @@ export const purchaseBurgerFail = (error) => {
     }
 }
 
-export const purchaseBurgerStart = () => {
-    return {
-        type: actionTypes.PURCHASE_BURGER_START
-    }
-}
-
+// dispatch send data to db
 export const purchaseBurger = (orderData, token) => {
     return dispatch => {
         dispatch(purchaseBurgerStart())
@@ -35,12 +46,7 @@ export const purchaseBurger = (orderData, token) => {
     }
 }
 
-export const purchaseInit = () => {
-    return {
-        type:actionTypes.PURCHASE_INIT
-    }
-}
-
+// when fetch order success then set loading false and orders from db
 export const fetchOrdersSuccess = (orders) => {
     return{
         type:actionTypes.FETCH_ORDERS_SUCCESS,
@@ -48,6 +54,8 @@ export const fetchOrdersSuccess = (orders) => {
     }
 }
 
+// when fetch order fail then set loading false and orders error after that 
+// hoc be show modal error
 export const fetchOrdersFail = (error) => {
     return{
         type:actionTypes.FETCH_ORDERS_FAIL,
@@ -55,12 +63,14 @@ export const fetchOrdersFail = (error) => {
     }
 }
 
+// before fetch data set loading true
 export const fetchOrdersStart = () => {
     return {
         type: actionTypes.FETCH_ORDERS_START
     }
 }
 
+// authe token for access to order page
 export const fetchOrders = (token, userId) => {
     return dispatch => {
         dispatch(fetchOrdersStart())

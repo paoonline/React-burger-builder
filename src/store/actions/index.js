@@ -16,3 +16,5 @@ export {
     setAuthRedirectPath,
     authCheckState
 } from './auth'
+
+//combine all action

@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import Modal from '../../components/UI/Modal/Modal'
 
+
+// check data from fetch then return components
 const withErrorHandler = (WrappedComponent, axios) => {
     return class extends Component{
         state = {

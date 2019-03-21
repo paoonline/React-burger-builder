@@ -6,11 +6,14 @@ const input = (props) => {
     let validationError = null;
     const inputClasses = [classes.InputElement]
 
+    // get props invalid, validate
     if(props.invalid && props.shouldValidate && props.touched){
         inputClasses.push(classes.Invalid)
         validationError = <p className={classes.ValidationError}>Please enter a valid value!</p>;
     }
+    //
 
+    // return style input from props.elementType
     switch(props.elementType){
         case ('input'):
             inputElement = <input 
@@ -46,8 +49,10 @@ const input = (props) => {
     return(
         <div className={classes.Input}>
             <label className={classes.Label}>{props.label}</label>
+            {/* redender input and validation */}
             {inputElement}
             {validationError}
+            {/*  */}
         </div>
     )
 }
