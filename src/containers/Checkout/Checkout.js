@@ -30,7 +30,7 @@ class Checkout extends Component {
             const purchasedRedirect = this.props.purchased ? <Redirect to="/"/> : null;
             summary = (
                 <div>
-                    {purchasedRedirect}
+                    {this.props.auth ? null: purchasedRedirect}
                     {/* send Props and render CheckoutSummary */}
                     <CheckoutSummary 
                         ingredients={this.props.ings}
@@ -54,7 +54,8 @@ class Checkout extends Component {
 const mapStateToProps = state => {
     return {
         ings: state.burgerBuilder.ingredients, //get ings
-        purchased: state.order.purchased // get purchased
+        purchased: state.order.purchased, // get purchased
+        auth : state.auth.token != null
     }
 }
 export default connect(mapStateToProps)(Checkout)
