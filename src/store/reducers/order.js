@@ -9,7 +9,7 @@ const initialState = {
 
 // when click continue order set purchased: false for access checkout page
 const purchaseInit = (state, action) => {
-    return updateObject(state, { purchased: true})
+    return updateObject(state, { purchased: false})
 }
 
 // set before send data loading true

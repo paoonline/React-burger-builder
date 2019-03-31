@@ -22,32 +22,23 @@ class Checkout extends Component {
         //
     }
     render(){
-        let summary = <Redirect to="/"/>
-
-        // check props ings
-        if(this.props.ings){
-            // check props purchased afther fetch data from purchaseBurgerSuccess
+        let summary = <Redirect to="/" />
+        if ( this.props.ings ) {
             const purchasedRedirect = this.props.purchased ? <Redirect to="/"/> : null;
             summary = (
                 <div>
-                    {this.props.auth ? null: purchasedRedirect}
-                    {/* send Props and render CheckoutSummary */}
-                    <CheckoutSummary 
+                    {purchasedRedirect}
+                    <CheckoutSummary
                         ingredients={this.props.ings}
                         checkoutCancelled={this.checkoutCancelledHandler}
-                        checkoutContinued={this.checkoutContinuedHandler} 
-                    />
-                    {/* */}
-                    <Route 
-                        path= {this.props.match.path + '/contact-data'} 
-                        component={ContactData}/>
+                        checkoutContinued={this.checkoutContinuedHandler} />
+                    <Route
+                        path={this.props.match.path + '/contact-data'}
+                        component={ContactData} />
                 </div>
-            )
-            //
+            );
         }
-        //
-        return summary
-        
+        return summary;
     }
 }
 
@@ -55,7 +46,6 @@ const mapStateToProps = state => {
     return {
         ings: state.burgerBuilder.ingredients, //get ings
         purchased: state.order.purchased, // get purchased
-        auth : state.auth.token != null
     }
 }
 export default connect(mapStateToProps)(Checkout)
